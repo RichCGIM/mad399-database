@@ -3,8 +3,7 @@
 create database school;
 use school;
 
-/* gender is an enum('f', 'm'), meaning only f and m are valid values.
- City is chosen from this list: Montreal | Laval | Brossard | Lasalle | Verdun | Anjou */
+/* gender is an enum('f', 'm'), meaning only f and m are valid values */
 create table student(
 	id int primary key auto_increment,
 	first_name nvarchar(64) not null,
