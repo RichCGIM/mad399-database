@@ -30,7 +30,7 @@ ON course(department, number);
 /* years are limited to 2016 to 2019 */
 create table offering(
 	id int primary key auto_increment,
-    department nvarchar(3),
+	department nvarchar(3),
     number int,
     season enum('Winter', 'Summer', 'Fall', 'Spring') not null,
     year year not null
@@ -39,7 +39,7 @@ create table offering(
 /* a grade is a number between 0 and 100. The passing grade is 50 */
 create table took(
 	sid int,
-    oid int,
+	oid int,
     grade int not null,
     constraint chk_grade check (grade >= 0 AND grade <= 100),
     constraint pk_took primary key (sid, oid),
