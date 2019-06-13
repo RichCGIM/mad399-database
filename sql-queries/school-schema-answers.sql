@@ -1,5 +1,5 @@
 /* SQL Exercise Set 1 - School */
-
+use school;
 /* Section 1 */
 /* 1 */
 select distinct city from student;
@@ -26,4 +26,12 @@ select count(*) from student where gender = 'm';
 select avg(grade) from took;
 /* 12 */
 select count(grade), sum(grade), avg(grade) from took where grade >= 50;
-
+/* 13 */
+select * from student where (first_name like 'A%' or last_name like '%e') and not (first_name like 'A%' and last_name like '%e');
+/* 14 */
+select distinct city from student where city like "_o%";
+/* 15 */
+select * from course as c
+join offering as o on c.id = o.course_id
+where o.season = 'Fall' and o.year = 2017 and c.advanced = True
+/* 16 */

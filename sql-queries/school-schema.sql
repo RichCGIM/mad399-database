@@ -1,5 +1,5 @@
 /* uncomment this if you want to make modifications */
-# drop database school;
+drop database school;
 create database school;
 use school;
 
@@ -29,10 +29,10 @@ ON course(department, number);
 /* years are limited to 2016 to 2019 */
 create table offering(
 	id int primary key auto_increment,
-	department nvarchar(3),
-    number int,
+    course_id int not null,
     season enum('Winter', 'Summer', 'Fall', 'Spring') not null,
-    year year not null
+    year year not null,
+    foreign key (course_id) references course(id)
 );
 
 /* a grade is a number between 0 and 100. The passing grade is 50 */
@@ -58,10 +58,10 @@ INSERT INTO course (department,number,advanced) VALUES ("FIN",788,1),("FIN",660,
 INSERT INTO course (department,number,advanced) VALUES ("MAD",685,0),("CST",954,0),("MAD",947,1),("MAD",544,1),("TLN",121,0),("FIN",813,1),("MAD",211,1),("FIN",271,1),("CST",512,0),("TLN",768,1);
 
 /* insert 40 offerings */
-INSERT INTO offering (department,number,season,year) VALUES ("TLN",203,"Summer",2017),("FIN",686,"Spring",2016),("CST",742,"Spring",2017),("FIN",813,"Fall",2017),("TLN",203,"Winter",2019),("FIN",788,"Summer",2017),("CST",742,"Summer",2017),("FIN",788,"Winter",2019),("CST",742,"Winter",2018),("MAD",131,"Summer",2016);
-INSERT INTO offering (department,number,season,year) VALUES ("CST",512,"Spring",2019),("FIN",686,"Fall",2017),("CST",954,"Fall",2016),("TLN",306,"Spring",2019),("CST",954,"Fall",2016),("TLN",306,"Winter",2016),("MAD",131,"Winter",2016),("CST",512,"Summer",2018),("FIN",813,"Winter",2018),("MAD",211,"Fall",2018);
-INSERT INTO offering (department,number,season,year) VALUES ("TLN",203,"Winter",2019),("CST",742,"Winter",2018),("TLN",203,"Fall",2019),("MAD",544,"Summer",2017),("TLN",121,"Fall",2019),("CST",512,"Fall",2018),("TLN",394,"Summer",2017),("CST",512,"Summer",2018),("TLN",566,"Summer",2018),("MAD",685,"Spring",2017);
-INSERT INTO offering (department,number,season,year) VALUES ("TLN",121,"Fall",2018),("CST",512,"Winter",2016),("MAD",131,"Fall",2017),("CST",512,"Summer",2017),("TLN",306,"Spring",2019),("MAD",685,"Winter",2018),("MAD",685,"Winter",2018),("CST",512,"Winter",2019),("FIN",788,"Winter",2019),("MAD",685,"Fall",2019);
+INSERT INTO offering (course_id,season,year) VALUES (5,"Summer",2017),(10,"Spring",2016),(7,"Spring",2017),(16,"Fall",2017),(5,"Winter",2019),(1,"Summer",2017),(7,"Summer",2017),(1,"Winter",2019),(7,"Winter",2018),(4,"Summer",2016);
+INSERT INTO offering (course_id,season,year) VALUES (19,"Spring",2019),(10,"Fall",2017),(12,"Fall",2016),(3,"Spring",2019),(12,"Fall",2016),(3,"Winter",2016),(4,"Winter",2016),(19,"Summer",2018),(16,"Winter",2018),(17,"Fall",2018);
+INSERT INTO offering (course_id,season,year) VALUES (5,"Winter",2019),(7,"Winter",2018),(5,"Fall",2019),(14,"Summer",2017),(15,"Fall",2019),(19,"Fall",2018),(9,"Summer",2017),(19,"Summer",2018),(6,"Summer",2018),(11,"Spring",2017);
+INSERT INTO offering (course_id,season,year) VALUES (15,"Fall",2018),(19,"Winter",2016),(4,"Fall",2017),(19,"Summer",2017),(3,"Spring",2019),(11,"Winter",2018),(11,"Winter",2018),(19,"Winter",2019),(1,"Winter",2019),(11,"Fall",2019);
 
 /* insert 200 tooks */
 INSERT INTO took (sid,oid,grade) VALUES (3,37,13),(26,31,34),(26,3,25),(11,27,13),(1,16,37),(10,5,50),(7,14,72),(35,27,82),(24,33,56),(39,10,4);
