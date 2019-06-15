@@ -31,7 +31,37 @@ select * from student where (first_name like 'A%' or last_name like '%e') and no
 /* 14 */
 select distinct city from student where city like "_o%";
 /* 15 */
-select * from course as c
+select c.department, c.number, c.advanced from course as c
 join offering as o on c.id = o.course_id
-where o.season = 'Fall' and o.year = 2017 and c.advanced = True
+where o.season = 'Fall' and o.year = 2017 and c.advanced = 1;
 /* 16 */
+select department, count(*) from course group by department;
+/* 17 */
+select department, count(*) from offering
+join course on offering.course_id = course.id
+where offering.year = 2018
+group by course.department;
+/* 18 */
+select department, count(*) from offering
+join course on offering.course_id = course.id
+where offering.year = 2019
+group by course.department
+having count(*) > 1;
+/* 19 */
+select c.department, c.number, max(grade)
+from course as c
+join offering as o on o.course_id = c.id
+join took as t on t.oid = o.id
+group by c.department, c.number;
+/* 20 */
+select s.id, avg(t.grade)
+from student as s
+join took as t on s.id = t.sid
+where s.gender = 'm'
+group by s.id
+having avg(t.grade)>50;
+/* 21 */
+select gender, avg(grade)
+from student as s
+join took as t on t.sid = s.id
+group by gender;
